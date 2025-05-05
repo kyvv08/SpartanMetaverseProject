@@ -8,24 +8,32 @@ public class CamerController : MonoBehaviour
     float posX;
     float posY;
     float posZ;
+
+    float minX,maxX,minY,maxY;
     void Start()
     {
         if (target == null)
             return;
 
-        posX = target.position.x;
-        posY = target.position.y;
-        posZ = -10f;
-        transform.position = new Vector3(posX, posY, posZ);
+        maxX = 9.89f;
+        minX = -maxX + 2;
+        maxY = 7f;
+        minY = -maxY + 1;
+
+        Vector3 pos = target.position;
+        pos.x = target.position.x;
+        pos.y = target.position.y;
+        pos.z = -10f;
+        transform.position = pos;
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (target == null)
             return;
         Vector3 pos = transform.position;
-        pos.x = target.position.x;
-        pos.y = target.position.y;
-       transform.position = pos;
+        pos.x = Mathf.Clamp(target.position.x, minX, maxX);
+        pos.y = Mathf.Clamp(target.position.y, minY, maxY);
+        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime* 5f);
     }
 }
