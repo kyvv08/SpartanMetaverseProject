@@ -8,6 +8,11 @@ public class PlayerController : BaseController
 {
     private Camera camera;
 
+    private IMiniGame miniGame;
+
+    private const string str_miniGameZone = "MinigameZone";
+
+    bool isTrigger_mini = false;
     protected override void Start()
     {
         base.Start();
@@ -16,7 +21,6 @@ public class PlayerController : BaseController
 
     protected override void HandleAction()
     {
-
     }
 
     void OnMove(InputValue inputValue)
@@ -26,6 +30,25 @@ public class PlayerController : BaseController
         if (movementDirection != Vector2.zero)
         {
             lookDirection = movementDirection;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(str_miniGameZone))
+        {
+            miniGame = collision.GetComponent<IMiniGame>();
+            isTrigger_mini = true;
+            miniGame.ShowUI();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag(str_miniGameZone))
+        {
+            isTrigger_mini = false;
+            miniGame = null;
         }
     }
 }
