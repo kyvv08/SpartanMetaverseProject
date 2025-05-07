@@ -1,34 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class Block : MonoBehaviour
-{
-    [SerializeField]
-    private float moveSpeed = 3f;
-    private bool isMoving = true;
-    [SerializeField]
-    private float moveRange = 3f;
+//public class Block : MonoBehaviour
+//{
+//    [SerializeField]
+//    private float moveSpeed = 3f;
+//    private bool isMoving = true;
+//    [SerializeField]
+//    private float moveRange = 3f;
 
-    private float direction = 1f;
-    private Vector3 startPos;
+//    private int direction = 1;
+//    private float startX;
+//    void Start()
+//    {
+//        startX = 6f;
+//    }
 
-    void Start()
-    {
-        startPos = transform.position;
-    }
+//    void Update()
+//    {
+//        if (!isMoving) return;
 
-    void Update()
-    {
-        if (isMoving)
-        {
-            float moveOffset = Mathf.PingPong(Time.time * moveSpeed, moveRange * 2) - moveRange;
-            transform.position = new Vector3(startPos.x + moveOffset, transform.position.y, transform.position.z);
-        }
-    }
+//        float newX = transform.localPosition.x + direction * moveSpeed * Time.deltaTime;
+//        if (Mathf.Abs(newX - startX) > moveRange)
+//        {
+//            direction *= -1; // 반대 방향으로
+//            newX = Mathf.Clamp(newX, startX - moveRange, startX + moveRange);
+//        }
 
-    public void Stop()
-    {
-        isMoving = false;
-    }
-}
+//        transform.localPosition = new Vector3(newX, transform.localPosition.y, 0);
+//    }
+
+//    public void Stop()
+//    {
+//        isMoving = false;
+//    }
+//    public float GetXPosition()
+//    {
+//        return transform.localPosition.x;
+//    }
+//}

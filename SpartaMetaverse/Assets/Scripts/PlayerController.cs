@@ -21,10 +21,6 @@ public class PlayerController : BaseController
 
     protected override void HandleAction()
     {
-        if(isTrigger_mini && Input.GetKeyDown(KeyCode.F))
-        {
-            miniGame.StartMiniGame();
-        }
     }
 
     void OnMove(InputValue inputValue)
